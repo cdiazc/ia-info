@@ -188,9 +188,9 @@ Once all 5 subagents return, compile their results into the final digest. Apply 
 - The Must Read/Must Watch section should have a brief (1 line) note on *why* each pick made the list
 - Total digest should be readable in **under 3 minutes**
 
-### 5. Output Format
+### 5. Output — Markdown (in conversation)
 
-Display directly in the conversation. Do NOT create a file.
+Display the digest directly in the conversation:
 
 ```markdown
 # AI Weekly Digest — {Mon DD} to {Mon DD, YYYY}
@@ -229,7 +229,181 @@ _This section is optional. Omit entirely if no cross-agent convergence was spott
 *Sources: [ia-info](https://github.com/cdiazc/ia-info) | Generated {today's date}*
 ```
 
-### 6. Quality Checks (MANDATORY)
+### 6. Output — HTML File
+
+After displaying the markdown, also generate a styled HTML file and save it to `/tmp/ai-weekly-digest-{YYYY-MM-DD}.html`.
+
+Use the Write tool to create the file with this template — replace the content placeholders with the actual digest items compiled in step 4:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Weekly Digest — {date_range}</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --surface2: #242424;
+      --border: #333;
+      --text: #e0e0e0;
+      --text-muted: #888;
+      --accent-claude: #d4a574;
+      --accent-dev: #7aa2f7;
+      --accent-world: #9ece6a;
+      --accent-standards: #bb9af7;
+      --accent-picks: #ff9e64;
+      --link: #7dcfff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    header .date-range {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    section h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .badge {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .badge-claude { background: var(--accent-claude); }
+    .badge-dev { background: var(--accent-dev); }
+    .badge-world { background: var(--accent-world); }
+    .badge-standards { background: var(--accent-standards); }
+    .badge-picks { background: var(--accent-picks); }
+    ul { list-style: none; }
+    ul li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--surface2);
+      font-size: 0.92rem;
+    }
+    ul li:last-child { border-bottom: none; }
+    a { color: var(--link); text-decoration: none; font-weight: 500; }
+    a:hover { text-decoration: underline; }
+    .source { color: var(--text-muted); font-size: 0.82rem; }
+    .why { color: var(--text-muted); font-size: 0.85rem; font-style: italic; display: block; margin-top: 0.2rem; }
+    .adopted { color: var(--accent-standards); font-size: 0.82rem; }
+    ol { list-style: none; counter-reset: picks; }
+    ol li { counter-increment: picks; position: relative; padding-left: 1.8rem; }
+    ol li::before {
+      content: counter(picks);
+      position: absolute;
+      left: 0;
+      top: 0.6rem;
+      background: var(--accent-picks);
+      color: var(--bg);
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--text-muted); }
+    .quiet { color: var(--text-muted); font-style: italic; padding: 0.5rem 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Weekly Digest</h1>
+    <div class="date-range">{Mon DD} — {Mon DD, YYYY}</div>
+  </header>
+
+  <section>
+    <h2><span class="badge badge-claude"></span> Claude Code & Anthropic</h2>
+    <ul>
+      <!-- For each item: -->
+      <li><a href="{url}">{Title}</a> <span class="source">— {Source}</span><br>{Summary}</li>
+      <!-- If empty: <li class="quiet">Quiet week — nothing notable.</li> -->
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="badge badge-dev"></span> Dev AI News (Other Providers)</h2>
+    <ul>
+      <li><a href="{url}">{Title}</a> <span class="source">— {Source}</span><br>{Summary}</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="badge badge-world"></span> LLM & AI World News</h2>
+    <ul>
+      <li><a href="{url}">{Title}</a> <span class="source">— {Source}</span><br>{Summary}</li>
+    </ul>
+  </section>
+
+  <!-- Section 4: Emerging Standards — ONLY include this <section> block if there are items. Omit entirely if none. -->
+  <section>
+    <h2><span class="badge badge-standards"></span> Emerging Standards Across AI Agents</h2>
+    <ul>
+      <li><strong>{Standard/Pattern}</strong> <span class="adopted">— Adopted by: {Agent1, Agent2, Agent3}</span><br>{What it is and why it's converging}</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="badge badge-picks"></span> Must Read & Must Watch</h2>
+    <ol>
+      <li><a href="{url}">{Title}</a> <span class="source">— {Source}</span><span class="why">Why: {reason}</span></li>
+    </ol>
+  </section>
+
+  <footer>
+    Sources: <a href="https://github.com/cdiazc/ia-info">ia-info</a> | Generated {today's date}
+  </footer>
+</body>
+</html>
+```
+
+After writing the file, tell the user: **"HTML version saved to `/tmp/ai-weekly-digest-{YYYY-MM-DD}.html`"** and suggest they open it with `open /tmp/ai-weekly-digest-{YYYY-MM-DD}.html`.
+
+### 7. Quality Checks (MANDATORY)
 
 Before presenting the digest:
 
