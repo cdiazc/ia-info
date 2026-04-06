@@ -29,6 +29,8 @@ https://www.youtube.com/@TrelisResearch
 
 https://www.youtube.com/@TheAIBreakdown-com
 
+https://youtube.com/@theaisearch
+
 ## Blog
 https://claude.com/blog
 
