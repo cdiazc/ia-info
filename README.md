@@ -56,6 +56,8 @@ https://www.digitalocean.com/resources/articles/ai-blogs
 
 https://developers.googleblog.com/
 
+https://claudelog.com/claude-news/
+
 ## Social media
 https://x.com/soohoonchoi/
 
