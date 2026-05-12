@@ -93,5 +93,7 @@ https://x.com/addyosmani
 
 https://x.com/klement_gunndu
 
+https://x.com/ClaudeCodeLog
+
 
 
