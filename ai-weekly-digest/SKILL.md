@@ -127,6 +127,8 @@ Check recent uploads from key AI YouTube channels:
 **Prompt template for each WebFetch:**
 > "List all videos uploaded in the last 7 days. For each: title, upload date, video URL, and 1-sentence description of the topic. Only include videos from {date_range}."
 
+**Title/ID pairing check (MANDATORY):** when extracting from a channel's RSS feed (`/feeds/videos.xml?channel_id=...`), quote each entry's title and video ID together from the same `<entry>` block — extracting titles and IDs as two separate lists and zipping them has produced off-by-one pairings where every link pointed to the adjacent video. Spot-check at least one URL per channel by re-fetching the feed (or the watch page) and confirming the title matches before returning results.
+
 **Return format:**
 ```
 ## YouTube — Recent Videos
