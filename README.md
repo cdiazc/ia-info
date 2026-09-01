@@ -1,9 +1,6 @@
 # ia-info
 
 ## Video
-https://www.twitch.tv/codelytv
-
-https://www.twitch.tv/midudev
 
 https://www.youtube.com/@Computerphile
 
@@ -31,7 +28,16 @@ https://www.youtube.com/@TheAIBreakdown-com
 
 https://youtube.com/@theaisearch
 
-## Blog
+## RSS
+http://github.blog/changelog/label/copilot/feed/
+http://reddit.com/r/ClaudeAI/top/.rss?t=week
+
+## Blog
+
+https://blog.modelcontextprotocol.io/
+
+https://embracethered.com/blog/
+
 https://claude.com/blog
 
 https://simonwillison.net/
@@ -58,7 +64,12 @@ https://developers.googleblog.com/
 
 https://claudelog.com/claude-news/
 
+https://developer.android.com/studio/preview/features
+
 ## Social media
+
+https://x.com/midudev
+
 https://x.com/soohoonchoi/
 
 https://x.com/steve_yegge
